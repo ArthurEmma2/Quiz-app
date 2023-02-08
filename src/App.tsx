@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Difficulty } from './components/Api'
+import React,{useState, useEffect} from 'react'
+import QuestionCard from './components/QuestionCard'
+import { fetchQuizQuestions } from './components/Api'
+const TOTAL_QUESTIONS = 15
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type Questions = {
+  question:string
 }
 
-export default App;
+const App = () => {
+  const [loading, setLoading] = useState(false)
+  const [questions, setQuestions] = useState<Questions[]>([])  
+  const [userAnswers, setUserAnswers] = useState([])
+  const [score, setScore] = useState(0)
+  const [gameOver, setIsGameOver] = useState(true)
+  const [number, setNumber] = useState(0)
+
+
+
+  useEffect(() =>{
+    console.log(fetchQuizQuestions(TOTAL_QUESTIONS, Difficulty.EASY)) 
+  },[])
+
+  const startTrivia = async () =>{
+
+  }
+
+
+  const checkAnswer = (e:React.MouseEvent<HTMLButtonElement>) =>{
+    
+  }
+
+  const nextQuestion = () =>{
+
+  }
+  return (
+    <>
+     <h1>React Quiz</h1>
+    <button className='start' onClick= {startTrivia}>Start</button>
+    <p className='score'>Score:</p>
+    <p className='loading'>Loading ....</p>
+    {/* <QuestionCard 
+    questionNum={number + 1}
+    totalQuestions={TOTAL_QUESTIONS }
+    questions={questions[number].questions}
+    answers={questions[number].answers}
+    userAnswer={userAnswers ? userAnswers[number]:undefined}
+    
+    /> */}
+
+    <button className='next' onClick={nextQuestion}>Next Question</button>
+    </>
+   
+  )
+}
+
+export default App
